@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
 
@@ -30,6 +31,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::middleware('isAdmin')->group(function() {
             Route::resource('productCategory', ProductCategoryController::class);
+
+
+            Route::get('test', [TestController::class, 'index']);
+            Route::get('test/ganjilGenap', [TestController::class, 'ganjilGenap']);
+            Route::get('test/perulanganDuaKali', [TestController::class, 'perulanganDuaKali']);
         });
     });
 });
